@@ -1,7 +1,5 @@
-require "mongoid/active_merchant/version"
+require 'activemerchant'
+require 'mongoid'
 
-module Mongoid
-  module ActiveMerchant
-    # Your code goes here...
-  end
-end
+require 'mongoid/active_merchant/version'
+require 'mongoid/active_merchant/billing_response'
