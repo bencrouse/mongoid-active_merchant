@@ -31,6 +31,8 @@ module ActiveMerchant
 
       class << self
         def demongoize(object)
+          return nil if object.blank?
+
           options = object['options'].symbolize_keys
 
           if options[:avs_result].present?

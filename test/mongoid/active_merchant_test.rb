@@ -95,4 +95,8 @@ class Mongoid::ActiveMerchantTest < Minitest::Test
     assert_equal(result.avs_result['street_match'], 'A')
     assert_equal(result.avs_result['postal_match'], 'B')
   end
+
+  def test_demongoizing_blank_object
+    assert_nil(ActiveMerchant::Billing::Response.demongoize(nil))
+  end
 end
