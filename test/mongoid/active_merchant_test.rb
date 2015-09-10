@@ -99,4 +99,22 @@ class Mongoid::ActiveMerchantTest < Minitest::Test
   def test_demongoizing_blank_object
     assert_nil(ActiveMerchant::Billing::Response.demongoize(nil))
   end
+
+  def test_to_json
+    as_json = @response.to_json
+    result = ActiveMerchant::Billing::Response.demongoize(JSON.parse(as_json))
+
+    assert(result.success?)
+    assert_equal(result.message, 'Success message')
+    assert_equal(result.params, { 'param' => 'foo' })
+    assert(result.test?)
+    assert_equal(result.authorization, '53433')
+    refute(result.fraud_review?)
+    assert_equal(result.error_code, 0)
+    assert_equal(result.emv_authorization, '123')
+    assert_equal(result.cvv_result['code'], 'M')
+    assert_equal(result.avs_result['code'], 'U')
+    assert_equal(result.avs_result['street_match'], 'A')
+    assert_equal(result.avs_result['postal_match'], 'B')
+  end
 end

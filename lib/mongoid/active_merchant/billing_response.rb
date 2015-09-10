@@ -10,7 +10,7 @@ module ActiveMerchant
         :avs_result
       ]
 
-      def mongoize
+      def as_json
         options = ATTRIBUTES_FOR_MONGOID_OPTIONS_SERIALIZATION.reduce({}) do |result, attr|
           value = instance_variable_get(:"@#{attr}")
           result[attr.to_s] = value unless value.nil?
@@ -27,6 +27,11 @@ module ActiveMerchant
           'params' => params,
           'options' => options
         }
+      end
+      alias_method :mongoize, :as_json
+
+      def to_json
+        as_json.to_json
       end
 
       class << self
