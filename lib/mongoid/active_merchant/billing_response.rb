@@ -10,7 +10,7 @@ module ActiveMerchant
         :avs_result
       ]
 
-      def as_json
+      def as_json(*)
         options = ATTRIBUTES_FOR_MONGOID_OPTIONS_SERIALIZATION.reduce({}) do |result, attr|
           value = instance_variable_get(:"@#{attr}")
           value = send(attr) if value.nil? && respond_to?(attr)
