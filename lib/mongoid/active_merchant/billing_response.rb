@@ -31,7 +31,7 @@ module ActiveMerchant
       end
       alias_method :mongoize, :as_json
 
-      def to_json
+      def to_json(*)
         as_json.to_json
       end
 
