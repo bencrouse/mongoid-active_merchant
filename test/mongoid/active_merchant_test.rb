@@ -103,6 +103,7 @@ class Mongoid::ActiveMerchantTest < Minitest::Test
   def test_to_json
     as_json = @response.to_json
     result = ActiveMerchant::Billing::Response.demongoize(JSON.parse(as_json))
+    pretty = JSON.pretty_generate(@response.as_json)
 
     assert(result.success?)
     assert_equal(result.message, 'Success message')
@@ -116,5 +117,6 @@ class Mongoid::ActiveMerchantTest < Minitest::Test
     assert_equal(result.avs_result['code'], 'U')
     assert_equal(result.avs_result['street_match'], 'A')
     assert_equal(result.avs_result['postal_match'], 'B')
+    assert_includes(pretty, @response.message)
   end
 end

@@ -1,4 +1,9 @@
 language: ruby
+sudo: false
+services:
+  - mongodb
 rvm:
-  - 2.2.2
-before_install: gem install bundler -v 1.10.6
+  - 2.4
+  - 2.5
+  - 2.6
+before_install: gem install bundler
